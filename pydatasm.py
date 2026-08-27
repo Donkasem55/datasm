@@ -39,8 +39,8 @@ def token_datasm(s):
 def datasm(s):
 	x = token_datasm(s)
 	i = 0
-	lab = "global"
-	sublab = "global"
+	lab = None
+	sublab = None
 	dat = {}
 	while i < len(x):
 		e = x[i]
@@ -55,6 +55,7 @@ def datasm(s):
 
 		elif e[-1] == ":":
 			lab = e[:-1]
+			sublab = None
 			if lab not in dat:
 				dat[lab] = {}
 
