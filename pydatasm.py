@@ -88,7 +88,41 @@ def datasm(s):
 						break
 				dat[lab][sublab] += f
 
+		elif e == "dw":
+			if lab not in dat:
+				dat[lab] = {}
+			if sublab not in dat[lab]:
+				dat[lab][sublab] = ""
+			if x[i-1] == ";":
+				f = ""
+				while True:
+					i += 1
+					if x[i] != ";":
+						e = 0
+						if x[i].startswith("0x"):
+							e = int(x[i][2:], 16)
+
+						elif x[i].startswith("0b"):
+							e = int(x[i][2:], 2)
+
+						elif x[i].startswith("0") and len(x[i]) > 1:
+							e = int(x[i][1:], 8)
+
+						else:
+							e = int(x[i], 10)
+
+						e1 = chr(e & 0x00FF)
+						e2 = chr(e & 0xFF00)
+						f += e2
+						f += e1
+
+					if x[i] == ";":
+						break
+
+				dat[lab][sublab] += f
+
 		i += 1
+
 	return dat
 
 def loaddatasm(filename):
