@@ -1,5 +1,5 @@
 def token_datasm(s):
-	z = []
+	z = [""]
 	incom = False
 	instr = False
 	for i in s:
